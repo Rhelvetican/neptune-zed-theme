@@ -2,7 +2,32 @@ use std::fmt::{Display, Formatter, Result as FmtResult};
 
 use serde::Serialize;
 
-fn to_hex(n: u8) -> String {
+#[derive(Serialize)]
+pub enum Color {
+    Rgb(Rgb),
+    Rgba(Rgba),
+}
+
+impl Color {
+    pub const fn new_rgb(r: u8, g: u8, b: u8) -> Self {
+        Self::Rgb(Rgb::new(r, g, b))
+    }
+
+    pub const fn new_rgba(r: u8, g: u8, b: u8, a: u8) -> Self {
+        Self::Rgba(Rgba::new(r, g, b, a))
+    }
+}
+
+impl Display for Color {
+    fn fmt(&self, f: &mut Formatter<'_>) -> FmtResult {
+        match self {
+            Color::Rgb(rgb) => rgb.fmt(f),
+            Color::Rgba(rgba) => rgba.fmt(f),
+        }
+    }
+}
+
+pub fn to_hex(n: u8) -> String {
     let tmp = format!("{:#04x}", n);
     String::from(&tmp[2..])
 }
@@ -69,4 +94,14 @@ impl Serialize for Rgba {
     {
         serializer.serialize_str(self.to_string().as_str())
     }
+}
+
+#[macro_export]
+macro_rules! color {
+    ($r:expr, $g:expr, $b:expr) => {
+        $crate::color::Color::new_rgb($r as u8, $g as u8, $b as u8)
+    };
+    ($r:expr, $g:expr, $b:expr, $a:expr) => {
+        $crate::color::Color::new_rgba($r as u8, $g as u8, $b as u8, $a as u8)
+    };
 }

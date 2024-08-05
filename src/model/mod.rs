@@ -15,6 +15,33 @@ pub use syntax::SyntaxStyle;
 use crate::color::Color;
 
 #[derive(Serialize)]
+pub struct ZedTheme {
+    #[serde(rename = "$schema")]
+    scm: String,
+    name: String,
+    author: String,
+    themes: Vec<Theme>,
+}
+
+impl Default for ZedTheme {
+    fn default() -> Self {
+        Self {
+            scm: String::from("https://zed.dev/schema/themes/v0.1.0.json"),
+            name: String::from("Neptune Theme"),
+            author: String::from("Rhelvetican"),
+            themes: Vec::new(),
+        }
+    }
+}
+
+impl ZedTheme {
+    /// Add a theme to the full Theme file.
+    pub fn add_theme(&mut self, theme: Theme) {
+        self.themes.push(theme)
+    }
+}
+
+#[derive(Serialize)]
 pub struct Theme {
     name: String,
     appearance: Appearance,

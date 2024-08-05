@@ -10,12 +10,13 @@ mod dark;
 mod light;
 
 mod csnt;
+mod util;
 
 use dark::{set_dark_player_colors, set_dark_syntax_colors};
 use light::{set_light_player_colors, set_light_syntax_colors};
 
-use libjsonutils::file::write_json;
 use model::{IntoStyle, Style, Theme, ZedTheme};
+use util::write_theme;
 
 const DIST: &str = "./themes/neptune_theme.json";
 
@@ -23,7 +24,8 @@ fn main() {
     let mut theme = ZedTheme::default();
     theme.add_theme(create_dark_theme());
     theme.add_theme(create_light_theme());
-    write_json(DIST, theme).unwrap();
+
+    write_theme(DIST, theme);
 }
 
 fn create_dark_theme() -> Theme {

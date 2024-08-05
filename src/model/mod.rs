@@ -9,7 +9,7 @@ use std::{
 };
 
 pub use player::PlayerColor;
-use serde::Serialize;
+use serde::{Serialize, Serializer};
 pub use syntax::SyntaxStyle;
 
 use crate::color::Color;
@@ -69,11 +69,18 @@ impl Display for AppErr {
 
 impl Error for AppErr {}
 
-#[derive(Serialize)]
-#[serde(untagged, rename_all = "lowercase")]
 pub enum Appearance {
     Light,
     Dark,
+}
+
+impl Serialize for Appearance {
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        match self {
+            Self::Light => serializer.serialize_str("light"),
+            Self::Dark => serializer.serialize_str("dark"),
+        }
+    }
 }
 
 impl FromStr for Appearance {

@@ -5,6 +5,5 @@ authors = ["Rhelvetican <bionicvnb@gmail.com>"]
 edition = "2021"
 
 [dependencies]
-json_utils_2024 = { version = "0.5" }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["preserve_order"] }

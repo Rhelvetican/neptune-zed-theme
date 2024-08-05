@@ -1,5 +1,9 @@
+use std::collections::HashMap;
+
 use crate::{color::Color, pallette::PHOTON};
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
+
+use super::{IntoStyle, Style};
 
 #[derive(Serialize)]
 pub struct SyntaxStyle {
@@ -15,6 +19,12 @@ impl Default for SyntaxStyle {
             font_style: None,
             font_weight: None,
         }
+    }
+}
+
+impl IntoStyle for HashMap<&'static str, SyntaxStyle> {
+    fn into_style(self) -> Style {
+        Style::Syntax(self)
     }
 }
 

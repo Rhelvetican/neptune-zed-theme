@@ -2,11 +2,19 @@ use std::fmt::{Display, Formatter, Result as FmtResult};
 
 use serde::Serialize;
 
+use crate::model::{IntoStyle, Style};
+
 #[derive(Serialize)]
 #[serde(untagged)]
 pub enum Color {
     Rgb(Rgb),
     Rgba(Rgba),
+}
+
+impl IntoStyle for Color {
+    fn into_style(self) -> Style {
+        Style::Color(self)
+    }
 }
 
 impl Color {

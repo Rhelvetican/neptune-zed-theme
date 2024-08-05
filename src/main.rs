@@ -7,7 +7,7 @@ use std::collections::HashMap;
 
 use color::Color;
 use libjsonutils::file::write_json;
-use model::{IntoStyle, PlayerColor, Style, SyntaxStyle};
+use model::{IntoStyle, PlayerColor, Style, SyntaxStyle, Theme};
 
 const DIST: &str = "./themes/neptune_theme.json";
 
@@ -192,10 +192,14 @@ const SYNTAXES_INDEX: &[&str] = &[
 fn main() {
     let syntaxes = set_syntax_color();
     let players = set_player_colors();
-    let mut theme = HashMap::<&str, Style>::new();
+    let mut style = HashMap::<&str, Style>::new();
 
-    theme.insert("players", players.into_style());
-    theme.insert("syntax", syntaxes.into_style());
+    style.insert("players", players.into_style());
+    style.insert("syntax", syntaxes.into_style());
+
+    let theme = Theme::new(String::from("x"), String::from("x"), style);
+
+    write_json(DIST, theme).unwrap();
 }
 
 fn set_syntax_color() -> HashMap<&'static str, SyntaxStyle> {

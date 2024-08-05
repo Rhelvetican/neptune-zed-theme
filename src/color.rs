@@ -3,6 +3,7 @@ use std::fmt::{Display, Formatter, Result as FmtResult};
 use serde::Serialize;
 
 #[derive(Serialize)]
+#[serde(untagged)]
 pub enum Color {
     Rgb(Rgb),
     Rgba(Rgba),

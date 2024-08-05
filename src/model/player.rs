@@ -1,8 +1,20 @@
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 
-#[derive(Deserialize, Serialize)]
+use crate::{color::Color, pallette::PHOTON};
+
+#[derive(Serialize)]
 pub struct PlayerColor {
-    cursor: String,
-    selection: String,
-    background: String,
+    cursor: Color,
+    selection: Color,
+    background: Color,
+}
+
+impl Default for PlayerColor {
+    fn default() -> Self {
+        Self {
+            cursor: PHOTON,
+            selection: PHOTON,
+            background: PHOTON,
+        }
+    }
 }

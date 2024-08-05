@@ -1,5 +1,3 @@
-use color::to_hex;
-
 #[macro_use]
 mod color;
 mod model;

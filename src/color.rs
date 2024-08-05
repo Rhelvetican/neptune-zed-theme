@@ -96,6 +96,7 @@ impl Serialize for Rgba {
     }
 }
 
+/// Macro to make a color.
 #[macro_export]
 macro_rules! color {
     ($r:expr, $g:expr, $b:expr) => {

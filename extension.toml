@@ -4,4 +4,4 @@ schema_version = 1
 version = "0.1.0"
 authors = ["Rhelvetican <bionicvnb@gmail.com>"]
 description = "A theme from the deep dark sea."
-repository = ""
+repository = "https://github.com/Rhelvetican/neptune-zed-theme"

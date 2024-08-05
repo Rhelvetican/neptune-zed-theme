@@ -1,3 +1,7 @@
+mod color;
+mod model;
 mod pallette;
 
-fn main() {}
+fn main() {
+    println!("{:#04x}", 85)
+}

@@ -30,8 +30,12 @@ impl IntoStyle for HashMap<&'static str, SyntaxStyle> {
 
 impl SyntaxStyle {
     /// Get the default variant.
-    pub fn new() -> Self {
-        Self::default()
+    pub fn new(color: Color, font_style: Option<String>, font_weight: Option<u16>) -> Self {
+        Self {
+            color,
+            font_style,
+            font_weight,
+        }
     }
 
     /// Change the color.

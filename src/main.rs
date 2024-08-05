@@ -200,7 +200,7 @@ fn main() {
 
 fn set_syntax_color() -> HashMap<&'static str, SyntaxStyle> {
     let mut syntax = HashMap::<&str, SyntaxStyle>::new();
-
+    for syntax in SYNTAXES_INDEX {}
     syntax
 }
 
